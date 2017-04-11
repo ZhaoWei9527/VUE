@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>09_列表渲染</title>
+</head>
+<body>
+<!--
+1. 遍历显示数组 : v-for / $index
+2. 遍历显示对象 : v-for / $key
+3. 扩展数组的方法:
+  $set(index, value)
+  $remove(value)
+-->
+
+<div id="demo">
+
+  <h2>测试: v-for 遍历数组</h2>
+  <ul>
+    <!--<li v-for="person in persons">-->
+      <!--{{$index}}-&#45;&#45;{{person.id}}-&#45;&#45;{{person.name}}-&#45;&#45;{{person.age}}-->
+    <!--</li>-->
+    <!--只遍历name里含有o的元素-->
+    <li v-for="person in persons | filterBy 'o' in 'name'">
+      {{$index}}---{{person.id}}---{{person.name}}---{{person.age}}
+      <!--&#45;&#45;<button @click="deleteP($index)">删除</button>-->
+      --<button @click="deleteP(person)">删除</button>
+      --<button @click="updateP(person , {id:new Date().now , name : 'zw' , age : 24})">更新</button>
+    </li>
+  </ul>
+  <h2>测试: v-for 遍历对象</h2>
+  <ul>
+    <li v-for="item in animation">{{item}}</li>
+  </ul>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+      el : '#demo',
+      data : {
+          persons : [
+            {id : 1,name : 'jack' , age : 17},
+
+            {id : 2,name : 'bob' , age : 18},
+            {id : 3,name : 'kobe' , age : 13},
+            {id : 4,name : 'rose' , age : 16}
+          ],
+          animation : {
+            name1 : 'scale',
+            name2 : 'rotate',
+            name3 : 'translate',
+            name4 : 'skew'
+          }
+      },
+      methods : {
+//        deleteP(index){
+////          this.persons.splice(index , 1)   发生错误，index不可用
+//
+//        }
+//        deleteP(person){
+//          var index = this.persons.indexOf(person)
+//          this.persons.splice(index , 1)   //可以用，麻烦
+//
+//        }
+        deleteP(person){
+          //框架给出的办法，上边的方法可以用也是因为它将数组大部分的方法都封装过了，也就是加了监视
+          this.persons.$remove(person)
+        },
+        updateP(oldP , newP){
+          var index = this.persons.indexOf(oldP)
+          this.persons.$set(index , newP)
+        }
+      },
+
+      computed : {
+
+      }
+  });
+</script>
+</body>
+</html>

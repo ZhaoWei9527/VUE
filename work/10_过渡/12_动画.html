@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>12_动画1</title>
+  <style>
+    .scroll-transition{
+      transition: all .3s ease;
+      height: 30px;
+      padding: 10px;
+      background-color: #eee;
+      overflow: hidden;
+    }
+    .scroll-enter , .scroll-leave{
+      height: 0;
+      padding: 0 10px;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+<div id="demo">
+  <p v-show="ok" transition="scroll"></p>
+  <button @click="ok=!ok">切换</button>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+  Vue.transition('scroll', {
+    beforeEnter: function (el) {
+      el.textContent = 'beforeEnter'
+    },
+    enter: function (el) {
+      el.textContent = 'enter'
+    },
+    afterEnter: function (el) {
+      el.textContent = 'afterEnter'
+    },
+    beforeLeave: function (el) {
+      el.textContent = 'beforeLeave'
+    },
+    leave: function (el) {
+      el.textContent = 'leave'
+    },
+    afterLeave: function (el) {
+      el.textContent = 'afterLeave'
+    }
+
+  })
+  new Vue({
+      el : '#demo',
+      data : {
+        ok : true
+      },
+      methods : {
+        toggle (){
+          this.ok = !this.ok
+        }
+      },
+
+      computed : {
+
+      }
+  });
+
+
+</script>
+</body>
+</html>

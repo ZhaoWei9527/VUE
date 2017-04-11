@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>05_数据绑定语法</title>
+</head>
+<body>
+<!--
+  1. 表达式 :
+//表达式的两种表达方式，两个括号表示普通的文本innerText,三个括号表示含有标签的文本innerHtml（也就是解析的更加深层次）
+    语法: {{exp}} 或 {{{exp}}}
+    功能: 向页面输出数据
+    可以调用对象的方法
+    使用过滤器
+  2. 强制数据绑定:
+    完整写法:
+      v-bind:xxx='yyy'  //yyy会作为表达式解析执行
+    简洁写法:
+      :xxx='yyy'
+  3. 事件监听:
+    完整写法:
+      v-on:keyup='xxx'
+      v-on:keyup='xxx(参数)'
+      v-on:keyup.enter='xxx'
+    简洁写法:
+      @keyup='xxx'
+      @keyup.enter='xxx'
+-->
+<div id="app">
+  <h1>表达式</h1>
+  <p>{{msg}}</p>
+  <p>{{{msg}}}</p>
+  <p>{{msg.toUpperCase()}}</p>
+  <p>{{msg | uppercase}}</p>
+  <p>{{number | currency }}</p>
+  <h1>强制数据绑定</h1>
+  <a v-bind:href="url">尚硅谷</a><br/>
+  <a href="{{url}}">尚硅谷</a><br/>
+  <a :href="url">尚硅谷</a><br/>
+  <h1>事件监听</h1>
+  <input type="text" v-model="Info" v-on:keyup.enter="showInfo" >
+  <input type="text" v-model="Info2" @keyup.enter="showInfo2('myLove')">
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+    el : '#app',
+    data : {
+      Info : '',
+      Info2 : '',
+      msg : '<a href="http://atguigu.com">hello world</a>',
+      number : 123123123,
+      url : 'http://www.atguigu.com'
+    },
+    methods : {
+      showInfo(){
+        alert(this.Info)
+      },
+      showInfo2(info){
+        alert(this.Info2 + '-----' + info)
+      }
+    }
+  })
+//  var obj = {
+//    name : {
+//      set : function (val) {
+//        return val
+//      },
+//      get : function () {
+//        return 1
+//      }
+//    }
+//  }
+//  console.log(obj.name)
+</script>
+</body>
+</html>

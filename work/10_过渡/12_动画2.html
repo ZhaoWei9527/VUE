@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>12_动画2</title>
+  <style>
+    .scale-transition {
+      display: inline-block; /* 否则 scale 动画不起作用 */
+    }
+    .scale-enter {
+      animation: scale-in .5s;
+    }
+    .scale-leave {
+      animation: scale-out .5s;
+    }
+    @keyframes scale-in {
+      0% {
+        transform: scale(0);
+      }
+      50% {
+        transform: scale(1.5);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    @keyframes scale-out {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.5);
+      }
+      100% {
+        transform: scale(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="demo">
+  <p v-show="ok" transition="scale">Look at me!</p>
+  <button @click="">Toggle</button>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script>
+  new Vue({
+      el : '#demo',
+      data : {
+        ok : true
+      },
+      methods : {
+
+      },
+
+      computed : {
+
+      }
+  });
+</script>
+</body>
+</html>

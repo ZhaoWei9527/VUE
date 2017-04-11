@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>11_表单控件绑定</title>
+</head>
+<body>
+<!--
+1. 使用v-model对表单项数据双向绑定
+  text/textarea
+  checkbox : 绑定boolean/string值
+  radio
+  select
+2. 失去焦点才更新: lazy
+3. 延迟指定时间才更新: debounce='1000'
+-->
+<div id="demo">
+  <p>Message is:{{msg}}</p>
+  <input type="text" v-model="msg">
+  <br>
+  <textarea v-model="msg"></textarea>
+  <hr/>
+  <input type="checkbox" v-model="checked">
+  <span>{{checked}}</span>
+  <hr/>
+  <!--这儿还是有点不懂-->
+  <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+  <label for="jack">jack</label>
+  <input type="checkbox" id="john" value="John" v-model="checkedNames">
+  <label for="john">john</label>
+  <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+  <label for="mike">mike</label>
+  <input type="checkbox">
+  <p>Checked names:{{checkedNames}}</p>
+  <hr/>
+  <input type="radio" id="male" v-model="sex" value="MALE">
+  <label for="male">MALE</label>
+  <input type="radio" id="famale" v-model="sex" value="FEMALE">
+  <label for="famale">FAMALE</label>
+  <p>SEX:{{sex}}</p>
+  <hr/>
+  <select v-model="city">
+    <option value="">未选择</option>
+    <option v-for="city in citys" :value="city.value">{{city.text}}</option>
+    <!--<option v-for="city in citys" value="{{city.value}}">{{city.text}}</option>-->
+
+  </select>
+  <span>selection:{{city}}</span>
+  <hr/>
+  <input type="text" placeholder="失去焦点才更新" v-model="inner" lazy>
+  <p>输入的数据为:{{inner}}</p>
+  <input type="text" placeholder="延迟1s更新" v-model="inner2" debounce="1000">
+  <p>输入的数据为:{{inner2}}</p>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+      el : '#demo',
+      data : {
+        msg : 'atguigu.com',
+        checked : false,
+        checkedNames : 'Jack',
+        sex : 'MALE',
+        citys : [
+          {value : 'BJ' , text : '北京'},
+          {value : 'TJ' , text : '天津'},
+          {value : 'XA' , text : '西安'}
+        ],
+        city : '',
+        inner : ''
+      },
+      methods : {
+
+      },
+
+      computed : {
+
+      }
+  });
+</script>
+</body>
+</html>
